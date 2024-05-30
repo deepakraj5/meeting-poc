@@ -1,0 +1,6 @@
+.controls-container {
+    display: flex;
+    align-items: center;
+    height: 6.2rem;
+    border: 1px solid black;
+}
