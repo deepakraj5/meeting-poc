@@ -2,5 +2,29 @@
     display: flex;
     align-items: center;
     height: 6.2rem;
-    border: 1px solid black;
+    justify-content: center;
+}
+
+.controls-container > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 40%;
+}
+
+.leave-meet-btn {
+    padding: 30px;
+}
+
+.leave-meet-btn > button {
+    padding: 10px 30px 10px 30px;
+    border-radius: 10px;
+    background-color: #EA4335;
+    color: white;
+    border: 0;
+    cursor: pointer;
+}
+
+.participant-btn {
+    cursor: pointer;
 }

@@ -6,6 +6,7 @@ import { Room } from './Room';
 import { Controls } from './Controls';
 import { Chat } from './Chat';
 import moment from 'moment'
+import { ChatMessages } from '../../_dto/ChatMessages';
 
 export const Meet = () => {
 
@@ -15,8 +16,10 @@ export const Meet = () => {
         noOfAttendee: 28
     })
 
+    const [chatMessages, setChatMessages] = useState<ChatMessages[]>([])
+
     return (
-        <MeetContext.Provider value={{ meetDetails, setMeetDetails }}>
+        <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages }}>
             <div className='meet-container'>
 
                 <div className='meet-left-container'>
