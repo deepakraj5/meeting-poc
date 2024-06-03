@@ -21,8 +21,9 @@ export const Login = () => {
             const response = await AuthService.login(loginInput)
 
             if(response.status === HttpStatusCode.Ok) {
+                localStorage.setItem('accessToken', response.data.data.jwtToken)
 
-                navigate('/meet')
+                navigate('/meet', { replace: true })
 
                 setLoginInput({
                     email: '',
@@ -77,6 +78,8 @@ export const Login = () => {
                     <div className='login-btn'>
                         <button onClick={handleLogin}>Login</button>
                     </div>
+
+                    <p className='create-account'>Create an account? <span onClick={() => navigate('/signup', { replace: true })}>Signup</span></p>
 
                 </div>
             </div>

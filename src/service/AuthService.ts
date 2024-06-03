@@ -14,4 +14,12 @@ export class AuthService {
         return axios.post(`${BASE_URL}/login`, data)
     }
 
+    public static validateAccessToken = async (accessToken: string): Promise<AxiosResponse> => {
+        return axios.post(`${BASE_URL}/validate_token`, null, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+    }
+
 }

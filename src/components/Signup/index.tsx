@@ -6,6 +6,7 @@ import { SignupRequest } from '../../_dto/SignupRequest'
 import { AuthService } from '../../service/AuthService'
 import { HttpStatusCode } from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export const Signup = () => {
 
@@ -15,6 +16,8 @@ export const Signup = () => {
         lastName: '',
         password: ''
     })
+
+    const navigate = useNavigate()
 
     const handleSignup = async () => {
         try {
@@ -95,6 +98,8 @@ export const Signup = () => {
                     <div className='signup-btn'>
                         <button onClick={handleSignup}>Signup</button>
                     </div>
+
+                    <p className='login-account'>Have an account? <span onClick={() => navigate('/login', { replace: true })}>Login</span></p>
 
                 </div>
             </div>
