@@ -7,6 +7,9 @@ import { Controls } from './Controls';
 import { Chat } from './Chat';
 import moment from 'moment'
 import { ChatMessages } from '../../_dto/ChatMessages';
+import { connect } from 'socket.io-client'
+
+const socket = connect('http://localhost:5001')
 
 export const Meet = () => {
 
@@ -16,11 +19,27 @@ export const Meet = () => {
         noOfAttendee: 28
     })
 
+    const [joinedMeet, setJoinedMeet] = useState<boolean>(false)
+    const [roomId, setRoomId] = useState<string>('')
+
     const [chatMessages, setChatMessages] = useState<ChatMessages[]>([])
 
+    const handleJoinMeet = async () => {
+        try {
+            setRoomId('test_room')
+            socket.emit('join_room', {
+                room: 'test_room'
+            })
+            setJoinedMeet(true)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages }}>
-            <div className='meet-container'>
+        <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages, socket, roomId }}>
+
+            {joinedMeet ? <div className='meet-container'>
 
                 <div className='meet-left-container'>
                     <div className='meet-title-container'>
@@ -44,7 +63,10 @@ export const Meet = () => {
                     <Chat />
                 </div>
 
-            </div>
+            </div> : <div>
+                <button onClick={() => handleJoinMeet()}>Join Meet</button>
+            </div>}
+
         </MeetContext.Provider>
     );
 }

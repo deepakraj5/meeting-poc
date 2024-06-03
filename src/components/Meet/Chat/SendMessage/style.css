@@ -13,6 +13,6 @@
     margin-right: 5px;
 }
 
-.send-msg-container > input:focus {
-    /* border: 0; */
+.send-msg-container > img {
+    cursor: pointer;
 }

@@ -38,7 +38,8 @@
     border-radius: 0px 8px 8px 8px;
     padding: 2px;
     width: 95%;
-    background-color: #bebbbb65;
+    /* background-color: #bebbbb65; */
+    background-color: #6CB4EE;
 }
 
 .chat-message > span {

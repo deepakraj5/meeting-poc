@@ -9,14 +9,26 @@ export const SendMessage = () => {
     const [message, setMessage] = useState<string>('')
 
     const handleSendMessage = () => {
-        if(!message) {
-
+        if(message && meetContext) {
+            meetContext.socket.emit('send_message', {
+                username: 'test',
+                room: meetContext.roomId,
+                message,
+                createdAt: Date.now()
+            })
+            setMessage('')
         }
     }
 
     return (
         <div className='send-msg-container'>
-            <input placeholder='Jot your message' type='text' value={message} onChange={e => setMessage(e.target.value)} />
+            <input 
+                placeholder='Jot your message' 
+                type='text' 
+                value={message} 
+                onChange={e => setMessage(e.target.value)} 
+                onKeyDown={e => e.key === 'Enter' ? handleSendMessage() : null}
+            />
             <img src={SendSVG} height={35} width={40} onClick={handleSendMessage} />
         </div>
     );
