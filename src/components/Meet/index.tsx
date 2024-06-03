@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Spinner';
 import { AuthService } from '../../service/AuthService';
 import { HttpStatusCode } from 'axios';
+import { Lobby } from './Lobby';
 
 const socket = connect('http://localhost:5001')
 
@@ -105,9 +106,7 @@ export const Meet = () => {
                         <Chat />
                     </div>
 
-                </div> : <div>
-                    <button onClick={() => handleJoinMeet()}>Join Meet</button>
-                </div>
+                </div> : <Lobby handleJoinMeet={handleJoinMeet} />
 
             }
 

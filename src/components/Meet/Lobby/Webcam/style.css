@@ -1,0 +1,28 @@
+.webcam-container {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.webcam-container > div {
+    /* height: 300px; */
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.webcam-video {
+    /* object-fit: fill; */
+    border-radius: 10px;
+    width: 600px;
+    height: auto;
+}
+
+.webcam-controls {
+    border: 1px solid black;
+}
+
+.webcam-controls > img {
+    cursor: pointer;
+    margin: 6px;
+}

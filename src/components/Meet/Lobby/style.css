@@ -1,0 +1,51 @@
+.lobby-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.lobby-multi-media {
+    /* border: 1px solid black; */
+    width: 40%;
+    height: 50%;
+}
+
+.lobby-controls {
+    width: 40%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lobby-join-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lobby-join-meet {
+    min-width: 10rem;
+    padding: 8px;
+    border-radius: 6px;
+    border: 0;
+    background-color: #008E97;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.lobby-leave {
+    min-width: 10rem;
+    padding: 8px;
+    border-radius: 6px;
+    border: 0;
+    background-color: #d71143;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+    margin: 10px;
+}
