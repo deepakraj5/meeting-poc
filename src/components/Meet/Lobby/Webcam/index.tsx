@@ -55,18 +55,22 @@ export const Webcam = () => {
 
             {
                 isSpin ?
-                    <Spinner />
+                    <div className='webcam-spinner'>
+                        <Spinner />
+                    </div>
                     :
                     <div>
-                        <video className='webcam-video' ref={videoRef} autoPlay />
+                        <div className='webcam'>
+                            <video ref={videoRef} autoPlay />
+                        </div>
+
+                        <div className='webcam-controls'>
+                            <img src={MicSVG} height={30} width={40} onClick={handleStartWebcam} />
+
+                            <img src={isVideoOn ? VideoSVG : VideoOffSVG} height={30} width={40} onClick={handleVideoClick} />
+                        </div>
                     </div>
             }
-
-            <div className='webcam-controls'>
-                <img src={MicSVG} height={30} width={40} onClick={handleStartWebcam} />
-
-                <img src={isVideoOn ? VideoSVG : VideoOffSVG} height={30} width={40} onClick={handleVideoClick} />
-            </div>
 
         </div>
     );

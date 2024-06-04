@@ -1,28 +1,34 @@
 .webcam-container {
-    border: 1px solid black;
-    width: 100%;
+    /* border: 1px solid black; */
+    height: 100%;
 }
 
-.webcam-container > div {
-    /* height: 300px; */
-    width: 600px;
+.webcam-spinner {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.webcam-video {
-    /* object-fit: fill; */
-    border-radius: 10px;
-    width: 600px;
-    height: auto;
+    height: 100%;
 }
 
 .webcam-controls {
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
 }
 
 .webcam-controls > img {
     cursor: pointer;
-    margin: 6px;
+    margin: 10px;
+}
+
+.webcam {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.webcam > video {
+    max-width: 100% !important;
+    max-height: 50vh !important;
+    border-radius: 20px;
 }

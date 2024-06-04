@@ -80,8 +80,11 @@ export const Meet = () => {
     return (
         <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages, socket, roomId }}>
 
-            {isSpin ? <Spinner /> :
-
+            {isSpin ? 
+                <div className='meet-spinner-container'>
+                    <Spinner />
+                </div>
+                :
                 joinedMeet ? <div className='meet-container'>
 
                     <div className='meet-left-container'>
