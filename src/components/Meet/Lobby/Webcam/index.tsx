@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import './style.css'
 import MicSVG from '../../../../assets/meet/mic.svg'
 import VideoSVG from '../../../../assets/meet/video.svg'
 import { Spinner } from '../../../Spinner';
 import VideoOffSVG from '../../../../assets/meet/videooff.svg'
+import { MeetContext } from '../../../../context/MeetContext';
+import MutedMicSVG from '../../../../assets/meet/mutedmic.svg'
 
 export const Webcam = () => {
 
     const [stream, setStream] = useState<MediaStream | null>(null)
     const videoRef = useRef<HTMLVideoElement | null>(null)
-    const [isVideoOn, setIsVideoOn] = useState<boolean>(true)
     const [isSpin, setIsSpin] = useState<boolean>(true)
+
+    const meetConext = useContext(MeetContext)
 
     const handleStartWebcam = async () => {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -41,12 +44,12 @@ export const Webcam = () => {
     }, [])
 
     const handleVideoClick = () => {
-        if (isVideoOn) {
+        if (meetConext?.mediaControls.isVideoOn) {
             handleStopWebcam()
-            setIsVideoOn(false)
+            meetConext.setMediaControls({ ...meetConext.mediaControls, isVideoOn: false })
         } else {
             handleStartWebcam()
-            setIsVideoOn(true)
+            meetConext?.setMediaControls({ ...meetConext.mediaControls, isVideoOn: true })
         }
     }
 
@@ -65,9 +68,19 @@ export const Webcam = () => {
                         </div>
 
                         <div className='webcam-controls'>
-                            <img src={MicSVG} height={30} width={40} onClick={handleStartWebcam} />
+                            <img 
+                                src={meetConext?.mediaControls.isAudioOn ? MicSVG : MutedMicSVG} 
+                                height={30} 
+                                width={40} 
+                                onClick={() => meetConext?.setMediaControls({ ...meetConext.mediaControls, isAudioOn: !meetConext.mediaControls.isAudioOn })} 
+                            />
 
-                            <img src={isVideoOn ? VideoSVG : VideoOffSVG} height={30} width={40} onClick={handleVideoClick} />
+                            <img 
+                                src={meetConext?.mediaControls.isVideoOn ? VideoSVG : VideoOffSVG} 
+                                height={30} 
+                                width={40} 
+                                onClick={handleVideoClick} 
+                            />
                         </div>
                     </div>
             }

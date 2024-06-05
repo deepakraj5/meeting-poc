@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MeetContext } from '../../context/MeetContext';
+import { MeetContext, MideaControls } from '../../context/MeetContext';
 import './style.css'
 import { MeetDetails } from '../../_dto/MeetDetails';
 import { Room } from './Room';
@@ -7,16 +7,27 @@ import { Controls } from './Controls';
 import { Chat } from './Chat';
 import moment from 'moment'
 import { ChatMessages } from '../../_dto/ChatMessages';
-import { connect } from 'socket.io-client'
+import { connect, Socket } from 'socket.io-client'
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../Spinner';
 import { AuthService } from '../../service/AuthService';
 import { HttpStatusCode } from 'axios';
 import { Lobby } from './Lobby';
 
-const socket = connect('http://localhost:5001')
+let socket: Socket
 
 export const Meet = () => {
+
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken')
+
+        socket = connect('http://localhost:5001', {
+            auth: {
+                accessToken
+            }
+        })
+    }, [])
 
     const navigate = useNavigate()
     const [isSpin, setIsSpin] = useState<boolean>(true)
@@ -64,6 +75,10 @@ export const Meet = () => {
     const [roomId, setRoomId] = useState<string>('')
 
     const [chatMessages, setChatMessages] = useState<ChatMessages[]>([])
+    const [mediaControls, setMediaControls] = useState<MideaControls>({
+        isAudioOn: true,
+        isVideoOn: true
+    })
 
     const handleJoinMeet = async () => {
         try {
@@ -78,7 +93,7 @@ export const Meet = () => {
     }
 
     return (
-        <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages, socket, roomId }}>
+        <MeetContext.Provider value={{ meetDetails, setMeetDetails, chatMessages, setChatMessages, socket, roomId, mediaControls, setMediaControls }}>
 
             {isSpin ? 
                 <div className='meet-spinner-container'>
